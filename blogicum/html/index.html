@@ -9,7 +9,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <title>{{ post.location }}. {{ post.date }}</title>
+    <title>Лента записей</title>
+    {% load static %}
   </head>
   <body>	   
     <header>
@@ -21,7 +22,7 @@
           </a>        
           <ul class="nav nav-pills">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog:index' %}">
+              <a class="nav-link active" href="{% url 'blog:index' %}">
                 Лента записей
               </a>
             </li>
@@ -41,6 +42,10 @@
     </header>
     <main>
       <div class="container py-5">
+        <h1>Лента записей</h1>                        
+        <!-- Перебираем в цикле все посты -->
+        {% for post in posts %}
+        <hr>
         <article>
           <ul>
             <li>
@@ -52,11 +57,14 @@
             <li>
               Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
             </li>
-          </ul>         
+          </ul>          
+          <!-- Первые 10 слов -->
           <p>
-            {{ post.text|linebreaksbr }}
-          </p>          
-        </article>                
+            {{ post.text|truncatewords:10 }}
+          </p>
+          <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+        </article>
+        {% endfor %}
       </div>
     </main>
     <footer class="border-top text-center py-3">
