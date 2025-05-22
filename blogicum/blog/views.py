@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.http import Http404
 
 posts = [
     {
@@ -49,8 +49,17 @@ def index(request):
     return render(request, 'blog/index.html', {'posts': posts[::-1]})
 
 
-def post_detail(request, id):
-    post = get_object_or_404(posts, id=id)
+def post_detail(request, post_id):
+    # Ищем пост вручную, так как get_object_or_404 не работает со списками
+    post = None
+    for p in posts:
+        if p['id'] == post_id:
+            post = p
+            break
+    
+    if not post:
+        raise Http404("Пост не найден")
+    
     return render(request, 'blog/detail.html', {'post': post})
 
 
