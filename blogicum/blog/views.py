@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import Http404
 
 posts = [
@@ -56,10 +56,8 @@ def post_detail(request, post_id):
         if p['id'] == post_id:
             post = p
             break
-    
     if not post:
         raise Http404("Пост не найден")
-    
     return render(request, 'blog/detail.html', {'post': post})
 
 
