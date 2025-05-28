@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import pytest
 from django.urls import reverse, NoReverseMatch
 
 
+=======
+>>>>>>> e338a4c1aa8aabab194ecf726bdf2d597bc84811
 def test_blog_urls():
     try:
         from blog.urls import urlpatterns as solution_urlpatterns
@@ -11,11 +14,19 @@ def test_blog_urls():
             f'`blog/urls.py` произошла ошибка: {e}'
         ) from e
     assert isinstance(solution_urlpatterns, list), (
+<<<<<<< HEAD
         'Убедитесь, что значение переменной `urlpatterns` - это список.'
     )
     assert len(solution_urlpatterns) >= 3, (
         'Убедитесь, что все необходимые маршруты добавлены в список '
         '`urlpatterns` в файле `blog/urls.py`.'
+=======
+        'Убедитесь, что значением переменной `urlpatterns` является список.'
+    )
+    assert len(solution_urlpatterns) >= 3, (
+        'Убедитесь, что к головному списку `urlpatterns` подключены маршруты '
+        'из файла `blog/urls.py`.'
+>>>>>>> e338a4c1aa8aabab194ecf726bdf2d597bc84811
     )
 
 
@@ -28,6 +39,7 @@ def test_pages_urls():
             f'`pages/urls.py` произошла ошибка: {e}'
         ) from e
     assert isinstance(solution_urlpatterns, list), (
+<<<<<<< HEAD
         'Убедитесь, что значение переменной `urlpatterns` в файле '
         '`pages/urls.py` - это список.'
     )
@@ -111,3 +123,30 @@ def test_pages_url_names(name):
             f'При поиске пути по имени `{name}` '
             f'возникла ошибка: {e}'
         ) from e
+=======
+        'Убедитесь, что значением переменной `urlpatterns` из файла '
+        '`pages/urls.py` является список.'
+    )
+    assert len(solution_urlpatterns) >= 2, (
+        'Убедитесь, что к головному списку `urlpatterns` подключены маршруты '
+        'из файла `pages/urls.py`.'
+    )
+
+
+def test_blogicum_urls():
+    try:
+        from blogicum.urls import urlpatterns as solution_urlpatterns
+    except Exception as e:
+        raise AssertionError(
+            'При импорте списка маршрутов `urlpatterns` из файла '
+            f'`blogicum/urls.py` произошла ошибка: {e}'
+        ) from e
+    assert isinstance(solution_urlpatterns, list), (
+        'Убедитесь, что значением переменной `urlpatterns` из файла '
+        '`blogicum/urls.py` является список.'
+    )
+    assert len(solution_urlpatterns) >= 3, (
+        'Убедитесь, что к головному списку `urlpatterns` подключены маршруты '
+        'из файла `blogicum/urls.py`.'
+    )
+>>>>>>> e338a4c1aa8aabab194ecf726bdf2d597bc84811
